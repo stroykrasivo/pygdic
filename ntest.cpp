@@ -55,8 +55,14 @@ int main( void )
  return 0;
  }
 
+curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+
+/* only allow redirects to HTTP and HTTPS URLs */
+  curl_easy_setopt(curl, CURLOPT_REDIR_PROTOCOLS,
+                   CURLPROTO_HTTP | CURLPROTO_HTTPS);
+
  /* Tell curl the URL of the file we're going to retrieve */
- curl_easy_setopt( curl, CURLOPT_URL, "jino.ru" );
+ curl_easy_setopt( curl, CURLOPT_URL, "https://translate.google.com/?hl=ru&langpair=auto|ru&text=retrieve" );
 
  /* Tell curl that we'll receive data to the function write_data, and
  * also provide it with a context pointer for our error return.
